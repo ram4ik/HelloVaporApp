@@ -8,9 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var name: String = ""
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            TextField("Put your name here...", text: $name)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+            
+            Button(action: {
+                doPostRequest()
+            }, label: {
+                Text("POST")
+            })
+        }
+    }
+    
+    private func doPostRequest() {
+        let network = Network()
+        network.postRequest(name: name)
     }
 }
 
